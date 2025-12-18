@@ -1,0 +1,136 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="hero-section">
+  <div class="intro__block">
+    <img
+      class="img__banner"
+      src="{% static 'images/banner1.jpg' %}"
+      alt="Bradbury Time"
+      onerror="this.src='https://via.placeholder.com/1200x300/1a1a2e/ffd700?text=Bradbury+Time'"
+    />
+
+    <div class="text__foto">
+      <h1 class="title__1">Bradbury Time</h1>
+      <p class="text__foto__mini">Премиальное кафе с атмосферой уюта</p>
+
+      <h2 class="title__2">Забронировать столик</h2>
+
+      {% if user.is_authenticated %}
+      <a href="/booking/create/" class="cta-button">Забронировать сейчас →</a>
+      {% else %}
+      <a href="{% url 'login' %}" class="cta-button"
+        >Войти для бронирования →</a
+      >
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="about-text">
+    <h2 class="about__title__2">О кафе</h2>
+    <p class="about__text">
+      BradburyTime — Ваш стол уже ждет. Забудьте о бесконечных звонках и
+      ожидании ответа. BradburyTime — это современный ресторан, где бронирование
+      столика занимает минуту. Выберите дату, время, количество гостей и увидите
+      все свободные места в зале. Подтвердите бронь в один клик — и мы будем
+      ждать вас с нетерпением. Ваш идеальный вечер начинается с простого
+      онлайн-бронирования.
+    </p>
+  </div>
+
+  <div class="about-images">
+    <div class="image-box">
+      <img
+        src="{% static 'images/banner.jpg' %}"
+        alt="Интерьер кафе"
+        onerror="this.src='https://via.placeholder.com/300x200/ccc/999?text=Фото+1'"
+      />
+    </div>
+    <div class="image-box">
+      <img
+        src="{% static 'images/eat.jpg' %}"
+        alt="Наши блюда"
+        onerror="this.src='https://via.placeholder.com/300x200/ccc/999?text=Фото+2'"
+      />
+    </div>
+    <div class="image-box">
+      <img
+        src="{% static 'images/atmosfere.jpg' %}"
+        alt="Атмосфера"
+        onerror="this.src='https://via.placeholder.com/300x200/ccc/999?text=Фото+3'"
+      />
+    </div>
+    <div class="image-box">
+      <img
+        src="{% static 'images/team.jpg' %}"
+        alt="Наша команда"
+        onerror="this.src='https://via.placeholder.com/300x200/ccc/999?text=Фото+4'"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="features-container">
+    <div class="feature-card">
+      <h3 class="feature-title">Удобное время</h3>
+      <p>Работаем с 12:00 до 23:00. Выбирайте удобное время для посещения.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3 class="feature-title">Удобное расположение</h3>
+      <p>
+        Центр города, удобная парковка, доступность общественным транспортом.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <h3 class="feature-title">Высокий рейтинг</h3>
+      <p>4.8 звезд на основе 500+ отзывов довольных клиентов.</p>
+    </div>
+  </div>
+</section>
+
+<section class="booking-steps">
+  <h2 class="booking-steps-title">Как забронировать столик</h2>
+  <div class="steps-container">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3 class="step-title">Войдите в систему</h3>
+      <p class="step-description">
+        Зарегистрируйтесь или войдите в свой аккаунт
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3 class="step-title">Выберите дату</h3>
+      <p class="step-description">Укажите желаемую дату посещения</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3 class="step-title">Выберите время</h3>
+      <p class="step-description">Выберите удобное время бронирования</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3 class="step-title">Подтвердите</h3>
+      <p class="step-description">Получите подтверждение бронирования</p>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+  <a href="/booking/create/" class="cta-button">Начать бронирование</a>
+  {% else %}
+  <div style="margin-top: 20px">
+    <p class="info-text">Для бронирования необходимо войти в систему</p>
+    <div style="display: flex; gap: 15px; justify-content: center">
+      <a class="cta-button" href="{% url 'login' %}">Войти</a>
+      <a class="cta-button" href="{% url 'register' %}">Регистрация</a>
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

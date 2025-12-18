@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="bookings-container">
+    <h2 class="book-title">Мои бронирования</h2>
+    
+    {% if bookings %}
+    <table class="bookings-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Столик</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Гости</th>
+                <th>Телефон</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td data-label="ID">{{ booking.id }}</td>
+                <td data-label="Столик">{{ booking.get_table_number_display }}</td>
+                <td data-label="Дата">{{ booking.date|date:"d.m.Y" }}</td>
+                <td data-label="Время">{{ booking.time }}</td>
+                <td data-label="Гости">{{ booking.guests }} чел.</td>
+                <td data-label="Телефон">{{ booking.phone }}</td>
+                <td data-label="Статус">
+                    {% if booking.confirmed %}
+                    <span class="status-confirmed">Подтверждено</span>
+                    {% else %}
+                    <span class="status-pending">Ожидает</span>
+                    {% endif %}
+                </td>
+                <td data-label="Действия">
+                    {% if booking.can_cancel %}
+                    <form action="{% url 'cancel_booking' booking.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cancel-btn" onclick="return confirm('Отменить бронирование?')">
+                            Отменить
+                        </button>
+                    </form>
+                    {% else %}
+                    <span class="cancel-disabled">Отмена недоступна</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-bookings">У вас нет активных бронирований.</p>
+    {% endif %}
+</div>
+{% endblock %}

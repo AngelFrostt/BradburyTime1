@@ -1,0 +1,213 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container__menu">
+  <h2 class="text-center mb-4">Наше меню</h2>
+
+  <div class="menu-filters text-center">
+    <button class="filter-btn active" data-filter="all">Все позиции</button>
+    <button class="filter-btn" data-filter="hot">Горячие блюда</button>
+    <button class="filter-btn" data-filter="drinks">Напитки</button>
+    <button class="filter-btn" data-filter="desserts">Десерты</button>
+  </div>
+
+  <div class="menu-category" id="hot-category">
+    <h3 class="text-center section-title">Горячие блюда</h3>
+    <div class="menu-items">
+      <div class="menu-item text-center" data-category="hot">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/steak.jpg' %}"
+            alt="Стейк Рибай"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Стейк Рибай</div>
+          <div class="item-description">
+            Мраморная говядина высшего качества, приготовленная на гриле до
+            идеальной прожарки medium rare.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="hot">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/risotto.jpg' %}"
+            alt="Ризотто с грибами"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Ризотто с белыми грибами</div>
+          <div class="item-description">
+            Кремовое ризотто с ароматными белыми грибами, пармезаном и
+            трюфельным маслом.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="hot">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/salmon.jpg' %}"
+            alt="Лосось в соусе терияки"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Лосось в соусе терияки</div>
+          <div class="item-description">
+            Нежное филе лосося, запеченное в медово-имбирном соусе терияки.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-category" id="drinks-category">
+    <h3 class="text-center section-title">Напитки</h3>
+    <div class="menu-items">
+      <div class="menu-item text-center" data-category="drinks">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/coffee.jpg' %}"
+            alt="Кофе Американо"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Кофе Американо</div>
+          <div class="item-description">
+            Классический черный кофе, приготовленный из отборных арабик.
+            Идеальный баланс крепости и аромата.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="drinks">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/mojito.jpg' %}"
+            alt="Мохито"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Классический Мохито</div>
+          <div class="item-description">
+            Освежающий коктейль с белым ромом, свежей мятой и лаймом.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="drinks">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/vino.jpg' %}"
+            alt="Домашний лимонад"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Ягодный лимонад</div>
+          <div class="item-description">
+            Домашний лимонад на основе свежих ягод с мятой и имбирем.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-category" id="desserts-category">
+    <h3 class="text-center section-title">Десерты</h3>
+    <div class="menu-items">
+      <div class="menu-item text-center" data-category="desserts">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/cheesecake.jpg' %}"
+            alt="Чизкейк Нью-Йорк"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Чизкейк Нью-Йорк</div>
+          <div class="item-description">
+            Классический запеченный чизкейк с нежнейшей творожно-сырной основой.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="desserts">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/tiramisu.jpg' %}"
+            alt="Тирамису"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Тирамису</div>
+          <div class="item-description">
+            Знаменитый итальянский десерт: кофейный бисквит и крем маскарпоне.
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item text-center" data-category="desserts">
+        <div class="item-image-container">
+          <img
+            class="menu__img"
+            src="{% static 'images/chocolate_fondant.jpg' %}"
+            alt="Шоколадный фондан"
+            class="item-image"
+          />
+        </div>
+        <div class="item-content">
+          <div class="item-title">Шоколадный фондан</div>
+          <div class="item-description">
+            Тёплый шоколадный кекс с жидкой начинкой и ванильным мороженым.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const menuItems = document.querySelectorAll(".menu-item");
+    const categories = document.querySelectorAll(".menu-category");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        this.classList.add("active");
+
+        const filterValue = this.getAttribute("data-filter");
+
+        categories.forEach((category) => {
+          const categoryId = category.id.replace("-category", "");
+
+          if (filterValue === "all" || categoryId === filterValue) {
+            category.classList.remove("category-hidden");
+            category.querySelectorAll(".menu-item").forEach((item) => {
+              item.style.display = "flex";
+            });
+          } else {
+            category.classList.add("category-hidden");
+          }
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}

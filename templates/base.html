@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BradburyTime</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>BradburyTime</h1>
+        <nav class="nav__menu-container">
+            <a class="nav__menu" href="/">Главная</a> 
+            <a class="nav__menu" href="/menu/">Меню</a> 
+            
+            {% if user.is_authenticated %}
+                <!-- для автор пользователей -->
+                <a class="nav__menu" href="/booking/create/">Забронировать</a> 
+              <a class="nav__menu" href="{% url 'my_bookings' %}">Мои брони</a>
+                <span>Привет, {{ user.username }}!</span> 
+                
+                {% if user.is_staff %}
+                    <a class="nav__menu" href="{% url 'admin:index' %}">Админ-панель</a> 
+                {% endif %}
+
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav__logaut" style="">
+                        Выйти
+                    </button>
+                </form>
+            {% else %}
+                <!-- для неавтор пользователей -->
+                <a href="{% url 'login' %}" class="nav-link-disabled" onclick="event.preventDefault(); alert('Для бронирования необходимо войти в систему'); window.location.href='{% url 'login' %}';">
+                    Забронировать
+                </a> 
+                <a href="{% url 'login' %}" class="nav-link-disabled" onclick="event.preventDefault(); alert('Для просмотра бронирований необходимо войти в систему'); window.location.href='{% url 'login' %}';">
+                    Мои брони
+                </a> 
+                <a class="nav__menu" href="{% url 'login' %}">Войти</a> 
+                <a class="nav__menu" href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </nav>
+       
+    </header>
+
+    <!-- система -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+            <button type="button" class="close-message" onclick="this.parentElement.style.display='none'">
+                ×
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <div class="footer-content">
+            <p class="footer-text"><strong>© 2025 BradburyTime</strong></p>
+            <div class="footer-links">
+                <a href="/">Главная</a>
+                <a href="/menu/">Меню</a>
+                <a href="/booking/create/">Забронировать</a>
+                {% comment %} <a href="/contacts/">Контакты</a> {% endcomment %}
+                {% comment %} <a href="/about/">О нас</a> {% endcomment %}
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var messages = document.querySelectorAll('.alert');
+                messages.forEach(function(message) {
+                    message.style.opacity = '0';
+                    message.style.transition = 'opacity 0.5s';
+                    setTimeout(function() {
+                        message.style.display = 'none';
+                    }, 500);
+                });
+            }, 5000);
+            
+            var disabledLinks = document.querySelectorAll('.nav-link-disabled');
+            disabledLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Эта функция доступна только авторизованным пользователям. Пожалуйста, войдите в систему или зарегистрируйтесь.');
+                    window.location.href = '{% url "login" %}';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
